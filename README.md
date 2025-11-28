@@ -10,7 +10,7 @@ It focuses on **understanding**, not performance, and faithfully reproduces the 
 * **Global token/KV/request state management**
 * **A scheduler-like control flow (request lifecycle management)**
 
-The codebase avoids CUDA kernels, PagedAttention, memory paging, and other optimizations so that the core logic remains transparent and easy to learn.
+The codebase avoids bottom optimizations like CUDA kernels, memory allocation and mainly focus on the dynamic batch and schedule strategy so that the core logic remains transparent and easy to learn.
 
 ---
 
