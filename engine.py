@@ -54,9 +54,10 @@ class MiniVLLMEngine:
 
 if __name__=='__main__':
     test = MiniVLLMEngine("mistralai/Mistral-7B-Instruct-v0.1")
-    prompts = ["what's your name?","where are you from?"]
+    prompts = ["Hi, Where are you from?","what's your name?"]
     prompts = [build_prompt(i) for i in prompts]
     req_ids = [test.register_request(i) for i in prompts]
+    print(f'req_ids{req_ids}')
     test.prefill(req_ids)
     for i in range(100):
         test.decode_step(req_ids)
@@ -64,3 +65,10 @@ if __name__=='__main__':
     text = test.tokenizer.decode(token_list, skip_special_tokens=False)
     print(f"raw tokens:{token_list}")
     print(f"text:{text}")
+    #print(test.runner.tokenizer(build_prompt("what's your name?"), return_tensors="pt").attention_mask)
+    #print(test.runner.tokenizer(build_prompt("Where are you from?"), return_tensors="pt").attention_mask)
+    token_list = test.TokenManager[1]
+    text = test.tokenizer.decode(token_list, skip_special_tokens=False)
+    print(f"raw tokens:{token_list}")
+    print(f"text:{text}")
+
