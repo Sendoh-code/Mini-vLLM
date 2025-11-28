@@ -96,7 +96,7 @@ mini-vllm/
 │
 ├── model_runner.py      # Pure inference: prefill() + decode_step()
 ├── utils.py             # KV slicing/gathering utilities
-└── engine.py            # MiniVLLMEngine (state + scheduling logic)
+└── engine.py            # MiniVLLMEngine (KV-cache manager/batch prefilling and decoding)
 ```
 
 ---
@@ -195,18 +195,3 @@ The implementation mirrors real production systems while remaining compact and e
 
 MIT License.
 
----
-
-If you'd like, I can also prepare:
-
-### ✔ A shorter README
-
-### ✔ A more academic IEEE/NeurIPS-style README
-
-### ✔ A README with diagrams
-
-### ✔ A README including installation commands and examples
-
-### ✔ A Chinese version
-
-Just tell me what style you prefer.
