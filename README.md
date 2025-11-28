@@ -1,10 +1,3 @@
-Here is a **clean, professional, publication-quality English README** for your mini-vLLM project.
-It is concise but complete, GitHub-ready, and written in a formal ML-systems style.
-
-If you want a shorter / longer / more academic / more industrial version, just tell me.
-
----
-
 # 🚀 mini-vLLM — A Minimal yet Functional vLLM-Style Inference Engine
 
 **mini-vLLM** is a lightweight educational re-implementation of the core ideas behind the vLLM inference engine.
