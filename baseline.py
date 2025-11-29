@@ -4,7 +4,8 @@ tok = AutoTokenizer.from_pretrained("mistralai/Mistral-7B-Instruct-v0.1",use_fas
 model = AutoModelForCausalLM.from_pretrained("mistralai/Mistral-7B-Instruct-v0.1")
 
 prompt = "<s>[INST] What's your name? [/INST]"
-input_ids = tok(prompt, return_tensors="pt").input_ids
-out = model.generate(input_ids, max_new_tokens=100)
-
-print(tok.decode(out[0], skip_special_tokens=False))
+data = ["where are you from?","Hi, model, My name is Jack the junior, what's your name?","I come from China the eastern country, where are you from?","what's your name?"]
+input_ids = [tok("<s>[INST]"+ i + "[/INST]", return_tensors="pt").input_ids for i in data]
+for i in input_ids:
+    out = model.generate(i)
+    print(tok.decode(out[0], skip_special_tokens=False))

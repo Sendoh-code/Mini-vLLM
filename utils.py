@@ -58,3 +58,32 @@ def gather_kv(req_ids, KVManager):
         batched.append((k_cat, v_cat))
 
     return tuple(batched)
+
+def gather_kv_with_padding(req_ids, KVManager):
+    # 找出当前 batch 中最长的 seq_len
+    max_len = max(KVManager[req_id][0][0].size(1) for req_id in req_ids)
+
+    first_kv = KVManager[req_ids[0]]
+    num_layers = len(first_kv)
+
+    batched = []
+
+    for layer_idx in range(num_layers):
+        k_list = []
+        v_list = []
+
+        for req_id in req_ids:
+            k, v = KVManager[req_id][layer_idx]
+            # 这里把每个k，v从(1, heads, seq_len, dim) padding到(1, heads, max_seq_len, dim)就行
+
+            k_list.append(k)  # 每个 k shape: (1, heads, seq_len, dim)
+            v_list.append(v)
+
+        # 拼 batch: (N requests, heads, seq_len, dim)
+        k_cat = torch.cat(k_list, dim=0)
+        v_cat = torch.cat(v_list, dim=0)
+
+        batched.append((k_cat, v_cat))
+
+    return tuple(batched)  # ⭐ 返回 tuple，Transformers 要求的格式
+

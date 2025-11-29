@@ -68,7 +68,7 @@ class MiniScheduler:
 
 if __name__=='__main__':
     test = MiniScheduler()
-    raw_prompt_list = ["what's your name?","where are you from?","what's your name?","where are you from?"]
+    raw_prompt_list = ["where are you from?","Hi, model, My name is Jack the junior, what's your name?","I come from China the eastern country, where are you from?","what's your name?"]
     
     test.prepare(raw_prompt_list)
     if test.waiting_queue:
@@ -90,7 +90,7 @@ if __name__=='__main__':
     for i in test.finished:
         token_list = test.engine.TokenManager[i]
         text = test.engine.tokenizer.decode(token_list, skip_special_tokens=False)
-        print(f"{count} task----------------------------")
+        print(f"{i} task----------------------------")
         print(f"raw tokens:{token_list}")
         print(f"text:{text}")
         count += 1
